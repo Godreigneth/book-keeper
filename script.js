@@ -68,3 +68,21 @@ function buildBookmarks() {
     bookmarksContainer.appendChild(item);
   });
 }
+
+// Fetch bookmarks
+function fetchBookmarks() {
+  // Get bookmarks from localStorage if available
+  if (localStorage.getItem('bookmarks')) {
+    bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+  } else {
+    // Create bookmarks array in localStorage
+    bookmarks = [
+      {
+        name: 'Jacinto Design',
+        url: 'http://jacinto.design',
+      },
+    ];
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  }
+  buildBookmarks();
+}
