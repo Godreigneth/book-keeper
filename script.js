@@ -99,3 +99,28 @@ function deleteBookmark(url) {
   localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   fetchBookmarks();
 }
+
+function storeBookmark(e) {
+  e.preventDefault();
+  const nameValue = websiteNameEl.value;
+  let urlValue = websiteUrlEl.value;
+  // Add 'https://' if not there
+  if (!urlValue.includes('https://') && !urlValue.includes('http://')) {
+    urlValue = `https://${urlValue}`;
+  }
+  // Validate
+  if (!validate(nameValue, urlValue)) {
+    return false;
+  }
+  // Set bookmark object, add to array
+  const bookmark = {
+    name: nameValue,
+    url: urlValue,
+  };
+  bookmarks.push(bookmark);
+  // Set bookmarks in localStorage, fetch, reset input fields
+  localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  fetchBookmarks();
+  bookmarkForm.reset();
+  websiteNameEl.focus();
+}
