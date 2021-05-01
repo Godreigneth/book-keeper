@@ -124,3 +124,6 @@ function storeBookmark(e) {
   bookmarkForm.reset();
   websiteNameEl.focus();
 }
+
+// Event Listener
+bookmarkForm.addEventListener('submit', storeBookmark);
